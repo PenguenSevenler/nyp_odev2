@@ -6,10 +6,19 @@ namespace Faktöriyel
     {
         internal static void Main(string[] args)
         {
-            Console.Write("Faktöriyelini hesaplamak istediğiniz sayıyı girin: ");
+            bool argüman_var = args.Length >= 1;
+            if (!argüman_var)
+            {
+                Console.Write("Faktöriyelini hesaplamak istediğiniz sayıyı girin: ");
+            }
             try
             {
-                uint n = uint.Parse(Console.ReadLine());
+                uint n = 0;
+                if (argüman_var)
+                    n = uint.Parse(args[0]);
+                else
+                    n = uint.Parse(Console.ReadLine());
+
                 Console.WriteLine("Sonuç: {0}", Hesapla.Faktöriyel(n));
             }
             catch
