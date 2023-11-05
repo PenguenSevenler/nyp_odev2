@@ -4,7 +4,7 @@ namespace e_number
 {
     internal class Program
     {
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             uint approximation = 0;
             Console.Write("Enter the number of steps to be performed: ");
@@ -58,9 +58,9 @@ namespace e_number
             }  
         }
 
-        internal static decimal RelativeError(decimal calculation, decimal theorical)
+        internal static decimal RelativeError(decimal calculation, decimal theoretical)
         {
-            return (Math.Abs(calculation - theorical) / theorical);
+            return (Math.Abs(calculation - theoretical) / theoretical);
         }
     }
 }
