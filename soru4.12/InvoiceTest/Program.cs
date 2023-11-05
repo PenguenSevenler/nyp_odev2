@@ -4,10 +4,47 @@ using iTextSharp.text.pdf;
 
 internal class Invoice    // we created a class for Invoice elements
 {
-    internal string PartNumber { get; set; }
-    internal string PartDescription { get; set; }
-    internal decimal PricePerItem { get; set; }
-    internal int Quantity { get; set; }
+    private string part_number;
+    internal string PartNumber
+    {
+        get => part_number;
+        set => part_number = value;
+    }
+
+    private string part_description;
+    internal string PartDescription
+    {
+        get => part_description;
+        set => part_description = value;
+    }
+
+    private decimal item_price;
+    internal decimal PricePerItem
+    {
+        get
+        {
+            return item_price;
+        }
+        set
+        {
+            if (value >= 0)
+                item_price = value;
+        }
+    }
+
+    private int quantity;
+    internal int Quantity 
+    {
+        get
+        {
+            return quantity;
+        }
+        set
+        {
+            if (value >= 0)
+                quantity = value;
+        }
+    }
 
     internal Invoice(string PartNumber, string PartDescription, double PricePerItem, int Quantity)
     {
@@ -20,17 +57,17 @@ internal class Invoice    // we created a class for Invoice elements
 
     protected internal decimal GetInvoiceAmount() // we created a method to calculate the price for each item sold
     {
-        return this.PricePerItem * (decimal)this.Quantity;
+        return item_price * (decimal)quantity;
     }
 
     protected internal void PrintItemInfo() // we created a method to show the item informations
     {
-        Console.WriteLine(this.PartNumber + " - " + this.PartDescription + " - " + this.PricePerItem + " USD");
+        Console.WriteLine(part_number + " - " + part_description + " - " + item_price + " USD");
     }
 
     public override string ToString()
     {
-        return $"{this.PartNumber} - {this.PartDescription} - {this.Quantity} pcs * {this.PricePerItem} USD" +
+        return $"{part_number} - {part_description} - {quantity} pcs * {item_price} USD" +
                  $"= {this.GetInvoiceAmount()} USD";
     }
 }
