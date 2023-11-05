@@ -1,73 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-
-class program
+namespace e_number
 {
-    static long factorial(int number)
+    internal class Program
     {
-        if (number == 0 || number == 1)
-            return 1;
-        else
-            return number * factorial(number - 1);
-
-
-    }
-
-
-    static decimal esayisi(int step)
-    {
-        decimal eNumber = 0;
-
-        if (step == 1)
+        static void Main(string[] args)
         {
-            return 1;
-        }
-        else
-        {
-            for(int i = 0; i < step; i++)
+            uint approximation = 0;
+            Console.Write("Enter the number of steps to be performed: ");
+            try
             {
-                eNumber += ((decimal)1.0/ (decimal)factorial(i));
-
-                Console.Write("1/" + i + "! ");
-
-                if(i != step-1)
-                    Console.Write("+ ");
-
+                approximation = Convert.ToUInt32(Console.ReadLine());
             }
+            catch
+            {
+                Console.WriteLine("You must enter a natural number.");
+                return;
+            }
+            Console.Write("\n");
 
-            Console.Write("= " + eNumber);
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.Write("the e that we found : ");
-            return eNumber;
-        }  
-    }
+            try
+            {
+                decimal calculation = e_number(approximation);
+                Console.WriteLine("Our calculation of e:\t{0}", calculation);
+                Console.WriteLine("Math library's e:\t{0}", Math.E);
+                Console.WriteLine("\nRelative error:\t\t{0}", RelativeError(calculation, (decimal)Math.E));
+            }
+            catch
+            {
+                Console.WriteLine("Calculation failed.");
+            }
+        }
 
+        internal static long Factorial(uint number)
+        {
+            if (number <= 1)
+                return 1;
+            else
+                return number * Factorial(number - 1);
+        }
 
+        internal static decimal e_number(uint step)
+        {
+            decimal eNumber = 0;
 
+            if (step <= 1)
+            {
+                return step;
+            }
+            else
+            {
+                for(uint i = 0; i < step; i++)
+                {
+                    eNumber += ((decimal)1.0 / (decimal)Factorial(i));
+                }
+                return eNumber;
+            }  
+        }
 
-
-    static void Main(string[] args)
-    {
-
-        Console.WriteLine("" + factorial(5));
-
-        Console.Write("input step number : ");  // ADIM SAYISI ARTTIKCA E SAYISINA YAKLASACAKSINIZ...
-
-        int step = Convert.ToInt32(Console.ReadLine());
-
-        Console.WriteLine(esayisi(step));
-
-        Console.WriteLine("original e : " + Math.E);
-
-
-
-
+        internal static decimal RelativeError(decimal calculation, decimal theorical)
+        {
+            return (Math.Abs(calculation - theorical) / theorical);
+        }
     }
 }
-
