@@ -151,7 +151,6 @@ public class Program
                     }
                 }
                 Console.Write("\n");
-                
             }
             else
             {
