@@ -92,20 +92,19 @@ public class Program
 
         while (true)
         {
-            Console.Write("Do you want to buy anything ? (yes or no) : ");
-            string choose = Console.ReadLine();
+            Console.Write("Do you want to buy anything ? (y/n) : ");
+            string choice = Console.ReadLine();
 
-            if (choose == "yes" || choose == "YES" || choose == "yeS" || choose == "yEs" || choose == "Yes" || choose == "YEs" || choose == "yES" || choose == "YeS")
+            if (choice == "y" || choice == "Y")
             {
                 
-                Console.Write("What do you want to buy? please use PN : ");
+                Console.Write("What do you want to buy? Only use PN : ");
                 string PN = Console.ReadLine();
 
 
                 switch (PN)  // PN PRODUCT NUMBER HANGI URUNU SECECEKSİN...
                 {
-                    case "001":
-                    case "1":
+                    case "P001":
                         Console.Write("How many ALuminium Carabiners do you want? : ");
                         product001.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product001.Quantity > 0)
@@ -115,8 +114,7 @@ public class Program
                         }
                         break;
 
-                    case "002":
-                    case "2":
+                    case "P002":
                         Console.Write("How many Stainless Steel Corner Brackets do you want? : ");
                         product002.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product002.Quantity > 0)
@@ -126,8 +124,7 @@ public class Program
                         }
                         break;
 
-                    case "003":
-                    case "3":
+                    case "P003":
                         Console.Write("How many Work Gloves do you want? : ");
                         product003.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product003.Quantity > 0)
@@ -137,8 +134,7 @@ public class Program
                         }
                         break;
 
-                    case "004":
-                    case "4":
+                    case "P004":
                         Console.Write("How many Plastic Chains do you want? : ");
                         product004.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product004.Quantity > 0)
@@ -148,8 +144,7 @@ public class Program
                         }
                         break;
 
-                    case "005":
-                    case "5":
+                    case "P005":
                         Console.Write("How many Stainless Steel Springs do you want? : ");
                         product005.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product005.Quantity > 0)
@@ -159,8 +154,7 @@ public class Program
                         }
                         break;
 
-                    case "006":
-                    case "6":
+                    case "P006":
                         Console.Write("How many PTFE Seal Thread Tape do you want? : ");
                         product006.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product006.Quantity > 0)
@@ -170,8 +164,7 @@ public class Program
                         }
                         break;
 
-                    case "007":
-                    case "7":
+                    case "P007":
                         Console.Write("How many Silver Door Handles do you want? : ");
                         product007.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product007.Quantity > 0)
@@ -181,8 +174,7 @@ public class Program
                         }
                         break;
 
-                    case "008":
-                    case "8":
+                    case "P008":
                         Console.Write("How many Mini Tool Kits do you want? : ");
                         product008.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product008.Quantity > 0)
@@ -192,8 +184,7 @@ public class Program
                         }
                         break;
 
-                    case "009":
-                    case "9":
+                    case "P009":
                         Console.Write("How many Middle Tool Kits do you want? : ");
                         product009.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product009.Quantity > 0)
@@ -203,8 +194,7 @@ public class Program
                         }
                         break;
 
-                    case "010":
-                    case "10":
+                    case "P010":
                         Console.Write("How many Professional Tool Kits do you want? : ");
                         product010.Quantity += Convert.ToInt32(Console.ReadLine());
                         if (product010.Quantity > 0)
@@ -213,8 +203,9 @@ public class Program
 
                         }
                         break;
-
-
+                    default:
+                        Console.WriteLine("Sorry, could not understand.");
+                        break;
                 }
 
 
