@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Reflection;
+using System.Globalization;
 
 public class Invoice    // we created a class for Invoice elements
 {
@@ -80,95 +81,11 @@ public class Program
         Console.WriteLine("\n");
 
         // we created a string to create a new file name.
-        // we used the dateTime because we want to create unique names.
 
 
+        string invoiceID = "invoice" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
-        // DATE TIME FORMATTING...
-        // DOSYALAMA VE PDF OLUSTURMAK ICIN ANLIK TARIH SAAT UZERINDEN PATH OLUSTURULACAK
-        // BOYLELIKLE HER DOSYANIN UNIQUE BIR ISMI OLACAK
-
-
-        string theday;
-        string themonth;
-        string theyear;
-        string thehour;
-        string theminute;
-        string thesecond;
-
-
-        int day =  DateTime.Now.Day;
-        if (day < 10)
-        { 
-            theday = "0" + day.ToString(); 
-        }
-        else
-        { 
-            theday = day.ToString(); 
-        }
-
-        int month = DateTime.Now.Month ;
-        if (month < 10)
-        {
-            themonth = "0" + month.ToString();
-        }
-        else
-        {
-            themonth = month.ToString();
-        }
-
-        int year = DateTime.Now.Year;
-        if (year < 10)
-        {
-            theyear = "0" + year.ToString();
-        }
-        else
-        {
-            theyear = year.ToString();
-        }
-
-        int hour = DateTime.Now.Hour;
-        if (hour < 10)
-        {
-            thehour = "0" + hour.ToString();
-        }
-        else
-        {
-            thehour = hour.ToString();
-        }
-
-        int minute = DateTime.Now.Minute;
-        if (minute < 10)
-        {
-            theminute = "0" + minute.ToString();
-        }
-        else
-        {
-            theminute = minute.ToString();
-        }
-
-        int second = DateTime.Now.Second;
-        if (second < 10)
-        {
-            thesecond = "0" + second.ToString();
-        }
-        else
-        {
-            thesecond = second.ToString();
-        }
-
-
-
-
-        string nowDate = "_" + theday + themonth + theyear + "_" + thehour + theminute + thesecond;
-
-
-        string invoiceID = "invoice" + nowDate;
-
-        string invoicePath = "C:\\vstudioprojects\\InvoiceTest\\" + invoiceID + ".pdf";
-
-
-        // DATE TIME FORMATTING FINISHED AND THE PATH CREATED...
+        string invoicePath = invoiceID + ".pdf";
 
 
         int didBuy = 0;
