@@ -7,42 +7,37 @@ using iTextSharp.text.pdf;
 using System.Reflection;
 using System.Globalization;
 
-public class Invoice    // we created a class for Invoice elements
+internal class Invoice    // we created a class for Invoice elements
 {
-    public string PartNumber { get; set; }
-    public string PartDescription { get; set; }
-    public double PricePerItem { get; set; }
-    public double Quantity { get; set; }
+    internal string PartNumber { get; set; }
+    internal string PartDescription { get; set; }
+    internal decimal PricePerItem { get; set; }
+    internal int Quantity { get; set; }
 
-    public Invoice(string PartNumber, string PartDescription, double PricePerItem, int Quantity)
+    internal Invoice(string PartNumber, string PartDescription, double PricePerItem, int Quantity)
     {
 
         this.PartNumber = PartNumber;
         this.PartDescription = PartDescription;
-        this.PricePerItem = PricePerItem;
+        this.PricePerItem = Convert.ToDecimal(PricePerItem);
         this.Quantity = Quantity;
     }
 
-    public double PriceOfTotalItem() // we created a method to calculate the price for each item sold
+    protected internal decimal PriceOfTotalItem() // we created a method to calculate the price for each item sold
     {
-        return this.PricePerItem * this.Quantity;
+        return this.PricePerItem * (decimal)this.Quantity;
     }
 
-    public void ItemShow() // we created a method to show the item informations
+    protected internal void PrintItemInfo() // we created a method to show the item informations
     {
-        Console.WriteLine("" + this.PartNumber + " - " + this.PartDescription + " - " + this.PricePerItem + " USD");
+        Console.WriteLine(this.PartNumber + " - " + this.PartDescription + " - " + this.PricePerItem + " USD");
     }
 
-
-    public string TotalPriceShow() // we created a method to
-                                   // return item informations , quantity and total price of each items sold.
-                                   // we can use these to create a database or txt or pdf file.
-                                   // or we will just write these to console at the end of program
+    public override string ToString()
     {
-        return ("" + this.PartNumber + "  -  " + this.PricePerItem + " USD  -  " + this.Quantity + " pcs" + "  -  " + this.PartDescription + " = " + Math.Round(this.PriceOfTotalItem(), 4) + " USD");
+        return $"{this.PartNumber} - {this.PartDescription} - {this.Quantity} pcs * {this.PricePerItem} USD" +
+                 $"= {this.PriceOfTotalItem()} USD";
     }
-
-
 }
 
 
@@ -67,16 +62,16 @@ public class Program
         // ONCELIKLE URUN LISTEMIZI BASALIM
 
 
-        product001.ItemShow();
-        product002.ItemShow();
-        product003.ItemShow();
-        product004.ItemShow();
-        product005.ItemShow();
-        product006.ItemShow();
-        product007.ItemShow();
-        product008.ItemShow();
-        product009.ItemShow();
-        product010.ItemShow();
+        product001.PrintItemInfo();
+        product002.PrintItemInfo();
+        product003.PrintItemInfo();
+        product004.PrintItemInfo();
+        product005.PrintItemInfo();
+        product006.PrintItemInfo();
+        product007.PrintItemInfo();
+        product008.PrintItemInfo();
+        product009.PrintItemInfo();
+        product010.PrintItemInfo();
 
         Console.WriteLine("\n");
 
@@ -239,58 +234,58 @@ public class Program
 
                     if (product001.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product001.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product001.ToString()));
                     }
 
                     if (product002.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product002.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product002.ToString()));
                     }
 
                     if (product003.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product003.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product003.ToString()));
                     }
 
                     if (product004.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product004.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product004.ToString()));
                     }
 
                     if (product005.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product005.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product005.ToString()));
                     }
 
                     if (product006.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product006.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product006.ToString()));
                     }
 
                     if (product007.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product007.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product007.ToString()));
                     }
                     
                     if (product008.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product008.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product008.ToString()));
                     }
 
                     if (product009.Quantity > 0)
                     {
-                        theReport.Add(new Paragraph(product009.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product009.ToString()));
                     }
 
                     if (product010.Quantity > 0) 
                     {
-                        theReport.Add(new Paragraph(product010.TotalPriceShow()));
+                        theReport.Add(new Paragraph(product010.ToString()));
                     }
 
 
 
 
-             double InvoiceTotal = product001.PriceOfTotalItem();
+             decimal InvoiceTotal = product001.PriceOfTotalItem();
                     InvoiceTotal += product002.PriceOfTotalItem();
                     InvoiceTotal += product003.PriceOfTotalItem();
                     InvoiceTotal += product004.PriceOfTotalItem();
@@ -317,10 +312,9 @@ public class Program
                 }
 
             }
-            else if (choose == "no" || choose == "nO" || choose == "No" || choose == "NO")
+            else
             {
-
-                Console.WriteLine("\nSee You Again :)");
+                Console.WriteLine("\nSee You Again");
 
                 if (didBuy == 1)
                     Console.WriteLine("Your invoice is here -> " + invoicePath);
@@ -328,8 +322,6 @@ public class Program
 
                 break;
             }
-            else
-                Console.WriteLine("\nYou wrote wrong your answer, please try again...");
         }
 
     }
